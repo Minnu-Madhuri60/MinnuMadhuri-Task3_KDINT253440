@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ATM Simulation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .atm-container {
+            width: 350px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px gray;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        button {
+            width: 80%;
+            padding: 10px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        input {
+            width: 75%;
+            padding: 8px;
+            margin: 10px 0;
+        }
+
+        .output {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="atm-container">
+        <h2>Simple ATM Simulation</h2>
+
+        <button onclick="checkBalance()">Check Balance</button><br>
+
+        <input type="number" id="amount" placeholder="Enter Amount"><br>
+
+        <button onclick="deposit()">Deposit</button><br>
+        <button onclick="withdraw()">Withdraw</button><br>
+        <button onclick="exitATM()">Exit</button>
+
+        <div class="output" id="result"></div>
+    </div>
+
+    <script>
+        let balance = 1000; // Initial balance
+
+        function checkBalance() {
+            document.getElementById("result").innerHTML =
+                "Current Balance: ₹" + balance.toFixed(2);
+        }
+
+        function deposit() {
+            let amount = parseFloat(document.getElementById("amount").value);
+
+            if (isNaN(amount) || amount <= 0) {
+                document.getElementById("result").innerHTML =
+                    "Enter a valid deposit amount!";
+                return;
+            }
+
+            balance += amount;
+            document.getElementById("result").innerHTML =
+                "₹" + amount + " deposited successfully.<br>" +
+                "Updated Balance: ₹" + balance.toFixed(2);
+        }
+
+        function withdraw() {
+            let amount = parseFloat(document.getElementById("amount").value);
+
+            if (isNaN(amount) || amount <= 0) {
+                document.getElementById("result").innerHTML =
+                    "Enter a valid withdrawal amount!";
+                return;
+            }
+
+            if (amount > balance) {
+                document.getElementById("result").innerHTML =
+                    "Insufficient balance!";
+                return;
+            }
+
+            balance -= amount;
+            document.getElementById("result").innerHTML =
+                "₹" + amount + " withdrawn successfully.<br>" +
+                "Remaining Balance: ₹" + balance.toFixed(2);
+        }
+
+        function exitATM() {
+            document.getElementById("result").innerHTML =
+                "Thank you for using the ATM!";
+        }
+    </script>
+
+</body>
+</html>
